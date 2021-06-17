@@ -1,10 +1,17 @@
-import { useEffect } from "react";
-import "./style.css";
+import * as S from "./styles.js";
 
-function Input({ value, onChange }) {
-  useEffect(() => {}, []);
+function Input({ icon, value, onChange }) {
+  return (
+    <S.Wrapper>
+      {icon}
 
-  return <input className="input" value={value} onChange={onChange} />;
+      <S.InputWrapper>
+        <S.Input value={value} onChange={onChange} />
+
+        <S.CancelIcon />
+      </S.InputWrapper>
+    </S.Wrapper>
+  );
 }
 
 export default Input;

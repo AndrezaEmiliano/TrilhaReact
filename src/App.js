@@ -1,38 +1,21 @@
-import Input from "./components/Input";
-import { useState } from "react";
-import Button from "./components/Button";
+import { createGlobalStyle } from "styled-components";
+import Home from "./pages/Home";
+
+const GlobalStyle = createGlobalStyle`
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+  }
+`;
 
 function App() {
-  const [value, setValue] = useState("");
-
-  const [tasks, setTasks] = useState([]);
-
-  function onChange(event) {
-    setValue(event.target.value);
-  }
-
-  function onClick() {
-    setTasks([
-      ...tasks,
-      {
-        text: value,
-      },
-    ]);
-    setValue("");
-  }
-
   return (
     <div>
-      <form onSubmit={(event) => event.preventDefault()}>
-        <Input value={value} onChange={onChange} />
+      <GlobalStyle />
 
-        <Button onClick={onClick}>Adicionar task</Button>
-      </form>
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>{task.text}</li>
-        ))}
-      </ul>
+      <Home />
     </div>
   );
 }
