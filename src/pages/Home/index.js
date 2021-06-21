@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import TaskForm from "../../components/TaskForm";
 import TaskList from "../../components/TaskList";
 import * as S from "./styles";
+import { Tasks } from "../../services/tasks";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    Tasks.getTasks().then(setTasks);
+  }, []);
 
   function addTask(value) {
     setTasks([
