@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import axios from "axios";
 
 import TaskForm from "../../components/TaskForm";
@@ -9,30 +9,30 @@ import { Tasks } from "../../services/tasks";
 function Home() {
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    Tasks.getTasks().then(setTasks);
+  const refreshTasks = useCallback(async () => {
+    const response = await Tasks.getTasks();
+    setTasks(response);
   }, []);
 
-  function addTask(value) {
-    setTasks([
-      ...tasks,
-      {
-        text: value,
-      },
-    ]);
+  async function createTask(text) {
+    await Tasks.createTask({ text });
+
+    refreshTasks();
   }
 
-  function removeTask(task) {
-    const index = tasks.indexOf(task);
+  async function removeTask(task) {
+    await Tasks.deleteTask(task.id);
 
-    const newTask = [...tasks.slice(0, index), ...tasks.slice(index + 1)];
-
-    setTasks(newTask);
+    refreshTasks();
   }
+
+  useEffect(() => {
+    refreshTasks();
+  }, [refreshTasks]);
 
   return (
     <S.Wrapper>
-      <TaskForm onSubmit={addTask} />
+      <TaskForm onSubmit={createTask} />
 
       <TaskList tasks={tasks} removeTask={removeTask} />
     </S.Wrapper>

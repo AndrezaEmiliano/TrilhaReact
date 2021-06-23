@@ -1,13 +1,20 @@
 {
   "tasks": [
     {
-      "id": 1, "text": "Comprar pão"
+      "id": 2,
+      "text": "Lavar louça"
     },
     {
-      "id": 2, "text": "Lavar louça"
+      "id": 3,
+      "text": "Comprar ração dos gatos"
     },
     {
-      "id": 3, "text": "Comprar ração dos gatos"
+      "text": "comprar fralda",
+      "id": 4
+    },
+    {
+      "text": "Ler o livro",
+      "id": 6
     }
   ]
 }
